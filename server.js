@@ -22,30 +22,25 @@ var checkRateLimit = require('./lib/rate-limit')(process.env.CORSANYWHERE_RATELI
 
 var cors_proxy = require('./lib/cors-anywhere');
 cors_proxy.createServer({
-//  originBlacklist: originBlacklist,
-//  originWhitelist: originWhitelist,
-//  requireHeader: ['origin', 'x-requested-with'],
-//  checkRateLimit: checkRateLimit,
-//  removeHeaders: [
-//    'cookie',
-//    'cookie2',
-//    // Strip Heroku-specific headers
-//    'x-heroku-queue-wait-time',
-//    'x-heroku-queue-depth',
-//    'x-heroku-dynos-in-use',
-//    'x-request-start',
-//  ],
-//  redirectSameOrigin: true,
-//  httpProxyOptions: {
-//    // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
-//      xfwd: false,
-//  },
-    ssl: {
-    key: fs.readFileSync('valid-ssl-key.pem', 'utf8'),
-    cert: fs.readFileSync('valid-ssl-cert.pem', 'utf8'),
+  originBlacklist: originBlacklist,
+  originWhitelist: originWhitelist,
+  requireHeader: ['origin', 'x-requested-with'],
+  checkRateLimit: checkRateLimit,
+  removeHeaders: [
+    'cookie',
+    'cookie2',
+    // Strip Heroku-specific headers
+    'x-heroku-queue-wait-time',
+    'x-heroku-queue-depth',
+    'x-heroku-dynos-in-use',
+    'x-request-start',
+  ],
+  redirectSameOrigin: true,
+  httpProxyOptions: {
+    // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
+      xfwd: false,
   },
-  target: 'https://localhost:9010',
-  secure: false, // Depends on your needs, could be false.
+  //secure: false, // Depends on your needs, could be false.
 }).listen(port, host, function() {
   console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
