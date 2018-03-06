@@ -42,10 +42,10 @@ cors_proxy.createServer({
 //  },
     ssl: {
     key: fs.readFileSync('valid-ssl-key.pem', 'utf8'),
-    cert: fs.readFileSync('valid-ssl-cert.pem', 'utf8')
+    cert: fs.readFileSync('valid-ssl-cert.pem', 'utf8'),
   },
   target: 'https://localhost:9010',
-  secure: true // Depends on your needs, could be false.
+  secure: false, // Depends on your needs, could be false.
 }).listen(port, host, function() {
   console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
